@@ -1,7 +1,7 @@
 const { connectToDatabase, closeDatabaseConnection } = require('../db');
 
 async function run() {
-    const db = await closeDatabaseConnection();
+    const db = await connectToDatabase();
     const collection = db.collection('orders');
 
     try {

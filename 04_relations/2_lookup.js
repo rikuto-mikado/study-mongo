@@ -10,7 +10,7 @@ async function run() {
         await postsColl.deleteMany({});
 
         const usersResult = await usersColl.insertOne({ name: 'Frank', age: 30 });
-        const userId = userResult.insertedId;
+        const userId = usersResult.insertedId;
 
         await postsColl.insertMany([
             { auther_id: userId, title: 'Testing reference patterns', content: 'Save to a collection separately' },
@@ -19,7 +19,7 @@ async function run() {
 
         console.log('--- $lookup ---');
         const pipeline = [
-            { $match: { name: 'Riku' } },
+            { $match: { name: 'Frank' } },
             {
                 $lookup: {
                     from: 'posts_rel',
@@ -33,7 +33,7 @@ async function run() {
         const result = await usersColl.aggregate(pipeline).toArray();
         console.log(JSON.stringify(result, null, 2));
     } finally {
-        await connectToDatabase();
+        await closeDatabaseConnection();
     }
 }
 

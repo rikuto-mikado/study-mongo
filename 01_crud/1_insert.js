@@ -17,7 +17,7 @@ async function insertDocument() {
             { name: "Alex", age: 25, skills: ["Java", "Vue"] },
             { name: "Taylor", age: 30, skills: ["C#", "React"] }
         ]);
-        console.log(`Added documents with _ids: ${result_2.insertedIds.join(', ')}`);
+        console.log(`Added documents with _ids: ${Object.values(result_2.insertedIds).join(', ')}`);
     } catch (error) {
         console.error('Error:', error);
     } finally {
